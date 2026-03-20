@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DesignMate - Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> <!-- Free Bootstrap for elegant grid -->
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f4f4; }
+        #canvas { border: 1px solid #ccc; background: white; margin: 20px auto; display: block; }
+        .toolbar { background: #333; color: white; padding: 10px; height: 100vh; overflow-y: auto; }
+        .toolbar button, .toolbar select, .toolbar input { margin-bottom: 10px; width: 100%; }
+        .toolbar .group { margin-bottom: 20px; border-bottom: 1px solid #555; padding-bottom: 10px; }
+        .toolbar h6 { margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-3 toolbar"> <!-- Expanded width for more tools -->
+                <h5>Tools</h5>
+                
+                <!-- Shapes -->
+                <div class="group">
+                    <h6>Shapes</h6>
+                    <button class="btn btn-light" onclick="addRectangle()">Rectangle</button>
+                    <button class="btn btn-light" onclick="addCircle()">Circle</button>
+                    <button class="btn btn-light" onclick="addTriangle()">Triangle</button>
+                </div>
+                
+                <!-- Text -->
+                <div class="group">
+                    <h6>Text</h6>
+                    <button class="btn btn-light" onclick="addText()">Add Text</button>
+                    <select id="fontSelect" class="form-control" onchange="changeFont()">
+                        <option value="Arial">Arial</option>
+                        <option value="Times New Roman">Times New Roman</option>
+                        <option value="Courier New">Courier New</option>
+                        <option value="Georgia">Georgia</option>
+                        <option value="Verdana">Verdana</option>
+                    </select>
+                    <input type="range" id="fontSizeSlider" min="10" max="100" value="20" onchange="changeFontSize()">
+                    <button class="btn btn-light" onclick="toggleBold()">Bold</button>
+                    <button class="btn btn-light" onclick="toggleItalic()">Italic</button>
+                    <button class="btn btn-light" onclick="toggleUnderline()">Underline</button>
+                    <div>
+                        <button class="btn btn-light btn-sm" onclick="alignText('left')">Left</button>
+                        <button class="btn btn-light btn-sm" onclick="alignText('center')">Center</button>
+                        <button class="btn btn-light btn-sm" onclick="alignText('right')">Right</button>
+                    </div>
+                </div>
+                
+                <!-- Colors -->
+                <div class="group">
+                    <h6>Colors</h6>
+                    <label>Text Color: <input type="color" id="textColorPicker" onchange="changeTextColor()"></label>
+                    <label>Shape Outline: <input type="color" id="shapeColorPicker" onchange="changeShapeColor()"></label>
+                    <label>Shape Fill: <input type="color" id="shapeFillColorPicker" onchange="changeShapeFillColor()"></label>
+                </div>
+                
+                <!-- Canvas Size -->
+                <div class="group">
+                    <h6>Canvas Size</h6>
+                    <button class="btn btn-light" onclick="setCanvasSize(800, 600)">Default (800x600)</button>
+                    <button class="btn btn-light" onclick="setCanvasSize(595, 842)">A4 (595x842)</button>
+                    <button class="btn btn-light" onclick="setCanvasSize(1080, 1080)">Instagram (1080x1080)</button>
+                    <input type="number" id="customWidth" placeholder="Width" class="form-control">
+                    <input type="number" id="customHeight" placeholder="Height" class="form-control">
+                    <button class="btn btn-light" onclick="setCustomCanvasSize()">Set Custom Size</button>
+                </div>
+                
+                <!-- Other -->
+                <div class="group">
+                    <h6>Other</h6>
+                    <button class="btn btn-light" onclick="addImage()">Add Image</button>
+                    <button class="btn btn-danger" onclick="deleteSelected()">Delete Selected</button>
+                    <div>
+                        <button class="btn btn-light" onclick="saveAsPNG()">Save as PNG</button>
+                        <button class="btn btn-light" onclick="saveAsJPG()">Save as JPG</button>
+                    </div>
+                    <button class="btn btn-light" onclick="saveDesign()">Save Design Locally</button>
+                    <button class="btn btn-light" onclick="loadDesign()">Load Saved Design</button>
+                </div>
+            </div>
+            <div class="col-9">
+                <h3>Your Design Canvas</h3>
+                <canvas id="canvas" width="800" height="600"></canvas>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.0/fabric.min.js"></script> <!-- Free Fabric.js for design features -->
+    <script src="dashboard.js"></script>
+</body>
+</html>

@@ -98,5 +98,13 @@
     </button>
   </a>
 </div>
+    <h3>Total Users: <span id="users">0</span></h3>
+
+<script>
+let count = localStorage.getItem("usersCount") || 0;
+count++;
+localStorage.setItem("usersCount", count);
+document.getElementById("users").innerText = count;
+</script>
 </body>
 </html>
